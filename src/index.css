@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input[type="color"], .bar {
+  height: 100px;
+}
+
+.vh90{
+  height: 90vh;
+}
+.rounded-border, .bar, .btn { 
+  border-radius: 50px;
+}
+
+.bar{
+  width: 100%;
+  border : 1px solid #e2e2e2;
+}
