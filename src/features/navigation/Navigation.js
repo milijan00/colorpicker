@@ -1,5 +1,5 @@
 import React from "react";
-import { navigationLinksSelector } from "./navigationSlice";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function Navigation(props){
 	const navLinks = useSelector(state => state.navigation.links);
@@ -15,7 +15,7 @@ export default function Navigation(props){
 		{navLinks.map((el, index)=>{
 			return (
 				<li className="nav-item" key={index}>
-					<a className="nav-link active" aria-current="page" href={el.path}>{el.name}</a>
+					<Link to={el.path} className="nav-link ">{el.name}</Link>
 				</li>
 			);
 		})}

@@ -2,11 +2,15 @@ import React from 'react';
 import Navigation from './features/navigation/Navigation';
 import Footer from './features/footer/Footer';
 import './App.css';
-
+import { Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <>
       <Navigation/>
+        <Routes>
+          <Route path="/" element=""/> 
+          <Route path="/palettes" element=""/> 
+          </Routes> 
       <Footer/>
     </>
     // <div className="App">
