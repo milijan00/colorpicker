@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+function onSearch(state){
+	if(state.search){
+		state.searchResult = state.palettes.filter(x => x.name.includes(state.search));
+	}else {
+		state.searchResult = state.palettes;
+	}
+}
 const palettesSlice = createSlice({
 	name : "palettes",
 	initialState : {
@@ -39,7 +46,7 @@ const palettesSlice = createSlice({
 			}
 		],
 		selected : null,
-		colorInputs : [] // inputs of type color will be added here
+		colorInputs : [] 
 
 	},
 	reducers :{
@@ -79,24 +86,20 @@ const palettesSlice = createSlice({
 			const colorIndex = state.palettes[index].colors.findIndex(c => c.value === action.payload.oldValue);
 			if(action.payload.value){
 				state.palettes[index].colors[colorIndex].value = action.payload.value;
+				onSearch(state);
 				state.selected = state.palettes[index];
 			}
 
 		},
 		onUpdatePaletteName(state, action){
-			const index = state.palettes.findIndex(x => x.name === action.payload.name);
 			if(action.payload.value){
+				const index = state.palettes.findIndex(x => x.name === action.payload.name);
 				state.palettes[index].name = action.payload.value;
+				onSearch(state);
 				state.selected = state.palettes[index];
 			}
 		},
-		onSearch(state){
-			if(state.search){
-				state.searchResult = state.palettes.filter(x => x.name.includes(state.search));
-			}else {
-				state.searchResult = state.palettes;
-			}
-		},
+		onSearch,
 		onSearchValueChange(state, action){
 			state.search = action.payload;
 		}
