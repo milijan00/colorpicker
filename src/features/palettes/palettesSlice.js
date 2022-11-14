@@ -4,15 +4,29 @@ const palettesSlice = createSlice({
 	name : "palettes",
 	initialState : {
 		paletteName : "",
-		palettes : [],
-		colors :[], // values of color inputs will be here
+		palettes : [
+			{
+				name : "Palette1",
+				colors : [
+					{
+						value : "#ff0000"
+					},
+					{
+						value : "#00ff00"
+					},
+					{
+						value : "#0000ff"
+					}
+				]
+			}
+		],
+		selected : null,
 		colorInputs : [] // inputs of type color will be added here
 
 	},
 	reducers :{
 		onAddNewInput(state){
 			state.colorInputs.push({
-				id : "input" + state.colorInputs.length+1,
 				value : "#000000"
 			});
 
@@ -29,6 +43,12 @@ const palettesSlice = createSlice({
 		},
 		onPaletteTitleChange(state, action){
 			state.paletteName = action.payload;
+		},
+		onDeletePalette(state, action){
+			state.palettes.splice(action.payload, 1);
+		},
+		onPaletteSelected(state, action){
+			state.selected = state.palettes[action.payload];
 		}
 	}
 });
