@@ -4,6 +4,7 @@ const palettesSlice = createSlice({
 	name : "palettes",
 	initialState : {
 		paletteName : "",
+		editPalette : false,
 		palettes : [
 			{
 				name : "Palette1",
@@ -49,6 +50,28 @@ const palettesSlice = createSlice({
 		},
 		onPaletteSelected(state, action){
 			state.selected = state.palettes[action.payload];
+		},
+		onEditPalette(state){
+			state.editPalette = true;
+		},
+		onHideEditPaletteModal(state){
+			state.editPalette = false;
+		},
+		onUpdatePaletteColor(state, action){
+			const index = state.palettes.findIndex(x => x.name === action.payload.name);
+			const colorIndex = state.palettes[index].colors.findIndex(c => c.value === action.payload.oldValue);
+			if(action.payload.value){
+				state.palettes[index].colors[colorIndex].value = action.payload.value;
+				state.selected = state.palettes[index];
+			}
+
+		},
+		onUpdatePaletteName(state, action){
+			const index = state.palettes.findIndex(x => x.name === action.payload.name);
+			if(action.payload.value){
+				state.palettes[index].name = action.payload.value;
+				state.selected = state.palettes[index];
+			}
 		}
 	}
 });

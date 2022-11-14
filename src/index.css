@@ -35,3 +35,11 @@ input[type="color"], .bar {
 .pointer-cursor{
   cursor: pointer;
 }
+#modal{
+  position:fixed;
+  z-index: 10;
+  top: 0px;
+  left : 0px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
