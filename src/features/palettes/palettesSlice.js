@@ -5,7 +5,24 @@ const palettesSlice = createSlice({
 	initialState : {
 		paletteName : "",
 		editPalette : false,
+		search : "",
 		palettes : [
+			{
+				name : "Palette1",
+				colors : [
+					{
+						value : "#ff0000"
+					},
+					{
+						value : "#00ff00"
+					},
+					{
+						value : "#0000ff"
+					}
+				]
+			}
+		],
+		searchResult : [
 			{
 				name : "Palette1",
 				colors : [
@@ -72,6 +89,16 @@ const palettesSlice = createSlice({
 				state.palettes[index].name = action.payload.value;
 				state.selected = state.palettes[index];
 			}
+		},
+		onSearch(state){
+			if(state.search){
+				state.searchResult = state.palettes.filter(x => x.name.includes(state.search));
+			}else {
+				state.searchResult = state.palettes;
+			}
+		},
+		onSearchValueChange(state, action){
+			state.search = action.payload;
 		}
 	}
 });

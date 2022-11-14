@@ -5,7 +5,12 @@ import PalettesList from "./PalettesList";
 import PaletteDetails from "./PaletteDetails";
 export default function Palettes(){
 	const dispatch = useDispatch();
-	const palettes = useSelector(state => state.palettes.palettes);
+	const search = useSelector(state => state.palettes.search);
+	let palettes = useSelector(state => state.palettes.searchResult);
+	// if(search){
+	// }else {
+	// 	palettes = useSelector(state => state.palettes.palettes);
+	// }
 	const selected = useSelector(state => state.palettes.selected);
 	const colorInputs = useSelector(state => state.palettes.colorInputs);
 	const paletteName = useSelector(state => state.palettes.paletteName);
@@ -35,6 +40,18 @@ export default function Palettes(){
 						</article>}
 					</section>
 					
+				</form>
+			</section>
+			<section className="">
+				<form method="POST" action="#" name="searchPalettesForm" onSubmit={(e)=>{e.preventDefault(); dispatch(palettesActions.onSearch())}}>
+					<section className="row">
+						<article className="col-12 col-md-10">
+							<input type="text" placeholder="Search" value={search} onChange={(e)=>{ dispatch(palettesActions.onSearchValueChange(e.target.value))}} className="form-control" />
+						</article>
+						<article className="col-12 col-md-2">
+							<input type="submit" value="Search" className="btn btn-primary"/>
+						</article>
+					</section>
 				</form>
 			</section>
 			<section className="row">
